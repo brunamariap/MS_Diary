@@ -1,9 +1,10 @@
 from fastapi import FastAPI, Depends
 from prisma import Prisma
-from controllers import grade
+from controllers import grade, diary
 
 app = FastAPI()
 app.include_router(grade.router)
+app.include_router(diary.router)
 
 prisma = Prisma(auto_register=True)
 

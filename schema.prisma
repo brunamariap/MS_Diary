@@ -18,28 +18,21 @@ generator client {
 // }
 
 model Gradle {
-  id             String       @id @default(uuid())
-  score          Int
-  bimester       Int
-  schoolReportId String
-  schoolReport   SchoolReport @relation(fields: [schoolReportId], references: [id])
-  disciplineId   String
-  attributedBy   String
+  id           String @id @default(uuid())
+  score        Int
+  bimester     Int
+  disciplineId String
+  attributedBy String
+  studentId    String
+  diaryId      String
+  diary        Diary  @relation(fields: [diaryId], references: [id], onDelete: Cascade)
 }
 
 model Diary {
-  id              String         @id @default(uuid())
+  id              String   @id @default(uuid())
   referencePeriod Int
   referenceYear   Int
   startDate       DateTime
   endDate         DateTime
-  schoolReport    SchoolReport[]
-}
-
-model SchoolReport {
-  id        String   @id @default(uuid())
-  diaryId   String
-  studentId String
-  diary     Diary    @relation(fields: [diaryId], references: [id])
   gradle    Gradle[]
 }

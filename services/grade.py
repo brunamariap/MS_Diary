@@ -6,11 +6,19 @@ from prisma.models import Gradle
 class GradeService:
 		
 		def __init__(self):
-				self.gradeRepository = GradeRepository()
-				
-    
-		def create_grade(self, request: GradleRequest) -> Gradle:
-				return self.gradeRepository.create(request)
+				self.service = GradeRepository()
 		
-		def list_all_grades(self):
-			return self.gradeRepository.get_all()
+		def create(self, request: GradleRequest):
+				return self.service.create(request)
+		
+		def get_all(self):
+			return self.service.get_all()
+		
+		def get_by_id(self, id: str):
+			return self.service.get_by_id(id)
+
+		def change(self, id: str, request: GradleRequest):
+			return self.service.change(id, request)
+
+		def remove(self, id: str):
+			return self.service.remove(id)
