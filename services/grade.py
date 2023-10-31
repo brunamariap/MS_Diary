@@ -1,5 +1,5 @@
 from repository.grade import GradeRepository
-from prisma.partials import CreateGradleBody
+from prisma.partials import GradleRequest
 from fastapi import Depends
 from prisma.models import Gradle
 
@@ -9,5 +9,8 @@ class GradeService:
 				self.gradeRepository = GradeRepository()
 				
     
-		async def create_grade(self, request: CreateGradleBody) -> Gradle:
-				return await self.gradeRepository.create(request)
+		def create_grade(self, request: GradleRequest) -> Gradle:
+				return self.gradeRepository.create(request)
+		
+		def list_all_grades(self):
+			return self.gradeRepository.get_all()
