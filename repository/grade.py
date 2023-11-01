@@ -1,19 +1,19 @@
-from prisma.models import Gradle
-from prisma.partials import GradleRequest
+from prisma.models import Grade
+from prisma.partials import GradeRequest
 
 
 class GradeRepository:
-    def create(self, request: GradleRequest):
-        return Gradle.prisma().create(request)
+    def create(self, request: GradeRequest):
+        return Grade.prisma().create(request)
 
     def get_all(self):
-        return Gradle.prisma().find_many(include={'diary': True})
+        return Grade.prisma().find_many(include={'diary': True})
 
     def get_by_id(self):
         pass
 
-    def change(self, id: str, request: GradleRequest):
-        return Gradle.prisma().update(data=request, where={'id': id})
+    def change(self, id: str, request: GradeRequest):
+        return Grade.prisma().update(data=request, where={'id': id})
 
     def remove(self, id: str):
-        return Gradle.prisma().delete({'id': id})
+        return Grade.prisma().delete({'id': id})
