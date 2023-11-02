@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI
 from prisma import Prisma
 from controllers import grade, diary
 

@@ -1,8 +1,6 @@
 from repository.grade import GradeRepository
 from prisma.partials import GradeRequest
-from fastapi import Depends
-from prisma.models import Grade
-
+from typing import Optional
 
 class GradeService:
 
@@ -23,3 +21,6 @@ class GradeService:
 
     def remove(self, id: str):
         return self.service.remove(id)
+    
+    def get_student_grades(self, student_id: str, diary_id: Optional[str]):
+        return self.service.get_student_grades(student_id, diary_id)
