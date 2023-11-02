@@ -9,8 +9,8 @@ class GradeRepository:
     def get_all(self):
         return Grade.prisma().find_many(include={'diary': True})
 
-    def get_by_id(self):
-        pass
+    def get_by_id(self, id):
+        return Grade.prisma().find_unique({'id': id})
 
     def change(self, id: str, request: GradeRequest):
         return Grade.prisma().update(data=request, where={'id': id})

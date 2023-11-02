@@ -10,7 +10,7 @@ class DiaryRepository:
         return Diary.prisma().find_many()
 
     def get_by_id(self):
-        pass
+        return Diary.prisma().find_unique({'id': id})
 
     def change(self, id: str, request: DiaryRequest):
         return Diary.prisma().update(data=request, where={'id': id})
