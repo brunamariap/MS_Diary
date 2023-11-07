@@ -11,13 +11,13 @@ diaryService = DiaryService()
 
 @router.get("/all")
 async def list_diaries() -> List[DiaryResponse]:
-    response = await diaryService.get_all()
+    response = diaryService.get_all()
 		
     return JSONResponse(content=jsonable_encoder(response), status_code=status.HTTP_200_OK)
 
 @router.post("/create")
-async def insert_diary(request: DiaryRequest) -> DiaryResponse:
-    response = await diaryService.create(request.dict())
+def insert_diary(request: DiaryRequest) -> DiaryResponse:
+    response = diaryService.create(request.dict())
 		
     return JSONResponse(content=jsonable_encoder(response), status_code=status.HTTP_200_OK)
 

@@ -1,22 +1,11 @@
-// database
-datasource db {
+generator Client {
+    provider = "prisma-client-python"
+}
+
+datasource test {
     provider = "sqlite"
-    url      = "file:database.db"
+    url      = "file:./test.db"
 }
-
-// generator
-generator client {
-    provider             = "prisma-client-py"
-    interface            = "sync"
-    recursive_type_depth = 5
-}
-
-// enum Bimester {
-// 	FIRST
-// 	SECOND
-// 	THIRD
-// 	FOURTH
-// }
 
 model Grade {
     id           String @id @default(uuid())
