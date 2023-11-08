@@ -8,6 +8,7 @@ datasource db {
 generator client {
     provider             = "prisma-client-py"
     interface            = "sync"
+    output               = "prisma1"
     recursive_type_depth = 5
 }
 
@@ -35,5 +36,5 @@ model Diary {
     referenceYear   Int
     startDate       DateTime
     endDate         DateTime
-    grade           Grade[]
+    grade          Grade[]
 }
