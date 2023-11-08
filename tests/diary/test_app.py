@@ -28,7 +28,7 @@ class TestApp(TestBase):
 
         response = client.post(
             f"{prefix}/create", json=jsonable_encoder(request))
-
+        print(response)
         assert response.status_code == 201
         # assert response.json() == diary
 

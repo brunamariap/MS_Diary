@@ -6,7 +6,7 @@ class GradeRepository:
 
     def __init__(self):
         self.repository = Grade
-        
+
     def create(self, request: GradeRequest):
         return self.repository.prisma().create(request)
 
@@ -31,7 +31,7 @@ class GradeRepository:
                 }, 
                 include={"diary": True },
             )
-        
+
         return self.repository.prisma().find_many(where={
             "studentId": student_id
         }, include={'diary': True})
