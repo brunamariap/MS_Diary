@@ -35,5 +35,5 @@ model Diary {
     referenceYear   Int
     startDate       DateTime
     endDate         DateTime
-    grade          Grade[]
+    grade           Grade[]
 }

@@ -1,13 +1,23 @@
-generator Client {
-    provider             = "prisma-client-python"
+// database
+datasource db {
+    provider = "sqlite"
+    url      = "file:database.db"
+}
+
+// generator
+generator client {
+    provider             = "prisma-client-py"
     interface            = "sync"
+    output               = "prisma1"
     recursive_type_depth = 5
 }
 
-datasource Test {
-    provider = "sqlite"
-    url      = "file:test.db"
-}
+// enum Bimester {
+// 	FIRST
+// 	SECOND
+// 	THIRD
+// 	FOURTH
+// }
 
 model Grade {
     id           String @id @default(uuid())
@@ -26,5 +36,5 @@ model Diary {
     referenceYear   Int
     startDate       DateTime
     endDate         DateTime
-    grade           Grade[]
+    grade          Grade[]
 }
