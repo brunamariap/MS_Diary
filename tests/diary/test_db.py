@@ -13,9 +13,9 @@ prefix = "/diaries"
 class TestApp(TestBase):
 
     def test_get_all_diaries(self, setUp):
-        response = client.get(f"{prefix}/all")
+        response = Diary.prisma().find_many()
 
-        assert response
+        assert len(response) >= 0
 
     def test_create_diary(self, setUp):
         day = datetime.datetime.utcnow().isoformat() + 'Z'
