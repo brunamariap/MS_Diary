@@ -1,19 +1,21 @@
-from fastapi.encoders import jsonable_encoder
 from fastapi.testclient import TestClient
-from prisma.partials import DiaryRequest
 from .test_base import TestBase
 from main import app
 from prisma.models import Diary
+from prisma.partials import DiaryRequest
 import datetime
+from services.diary import DiaryService
 
 client = TestClient(app)
 prefix = "/diaries"
 
 
+diaryService = DiaryService()
+
 class TestApp(TestBase):
 
     def test_get_all_diaries(self, setUp):
-        response = Diary.prisma().find_many()
+        response = diaryService.get_all()
 
         assert len(response) >= 0
 
@@ -25,12 +27,10 @@ class TestApp(TestBase):
             "startDate": day,
             "endDate": day
         }
-        request = DiaryRequest(**diary)
 
-        response = Diary.prisma().create(diary)
-        # print(response)
+        response = diaryService.create(diary)
+        
         assert response
-        # assert response.json() == diary
 
     def test_edit_diary(self, setUp):
         day = datetime.datetime.utcnow().isoformat() + 'Z'
@@ -48,12 +48,10 @@ class TestApp(TestBase):
             "endDate": day
         }
 
-        response_create_diary = Diary.prisma().create(diary)
-        diary_id = response_create_diary.id
-
-        response = Diary.prisma().update(data=edited_diary, where={
-            "id": diary_id
-        })
+        response_create_diary = diaryService.create(diary)
+        diary_id = response_create_diary.id 
+        
+        response = diaryService.change(diary_id, edited_diary)
         
         assert response
 
@@ -66,9 +64,9 @@ class TestApp(TestBase):
             "endDate": day
         }
         
-        response_create_diary = Diary.prisma().create(diary)
+        response_create_diary = diaryService.create(diary)
         diary_id = response_create_diary.id
 
-        response = Diary.prisma().delete(where={"id": diary_id})
+        response = diaryService.remove(diary_id)
         
         assert response
